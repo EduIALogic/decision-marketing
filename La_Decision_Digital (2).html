@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Decisión Digital</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: #f4f4f4; padding: 2rem; }
+    .container { max-width: 800px; margin: auto; background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    .narrativa { font-size: 1.2rem; margin-bottom: 1.5rem; }
+    .opciones button {
+      display: block;
+      width: 100%;
+      margin: 0.5rem 0;
+      padding: 1rem;
+      font-size: 1rem;
+      background: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .opciones button:hover { background: #0056b3; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="historia" class="narrativa"></div>
+    <div id="opciones" class="opciones"></div>
+  </div>
+
+  <script>
+    const historia = {
+      inicio: {
+        texto: "Eres parte de un equipo de jóvenes emprendedores con una idea brillante: lanzar una marca de productos ecológicos al mercado. Tienes un presupuesto limitado y la necesidad de darte a conocer rápidamente. ¿Qué estrategia de marketing digital eliges para iniciar?",
+        opciones: [
+          { texto: "Campaña en redes sociales con microinfluencers", destino: "redes" },
+          { texto: "SEO y blog con contenido educativo", destino: "seo" }
+        ]
+      },
+      redes: {
+        texto: "Has decidido lanzar una campaña con microinfluencers en Instagram y TikTok. La audiencia comienza a reaccionar, pero algunos comentarios negativos aparecen. ¿Cómo respondes?",
+        opciones: [
+          { texto: "Ignoras los comentarios negativos", destino: "ignorar" },
+          { texto: "Respondes de forma empática y profesional", destino: "responder" }
+        ]
+      },
+      seo: {
+        texto: "Empiezas a publicar contenido semanal en el blog y optimizas tu sitio web para SEO. El tráfico crece lentamente pero con calidad. Un competidor te copia el contenido. ¿Qué haces?",
+        opciones: [
+          { texto: "Contactas al competidor directamente", destino: "contacto" },
+          { texto: "Lo denuncias por plagio en buscadores", destino: "denuncia" }
+        ]
+      },
+      ignorar: {
+        texto: "Los comentarios negativos aumentan y algunos seguidores comienzan a desconfiar de la marca. La campaña pierde fuerza. FIN.",
+        opciones: []
+      },
+      responder: {
+        texto: "Tu respuesta profesional es bien recibida. La comunidad aprecia la transparencia y la campaña gana credibilidad. ¡Bien hecho! FIN.",
+        opciones: []
+      },
+      contacto: {
+        texto: "El competidor se disculpa y retira el contenido. Has defendido tu propiedad intelectual sin conflicto. ¡Buen movimiento estratégico! FIN.",
+        opciones: []
+      },
+      denuncia: {
+        texto: "La denuncia es efectiva, pero toma tiempo. Mientras tanto, pierdes algo de tráfico. Aprendizaje: el marketing digital también requiere protección legal. FIN.",
+        opciones: []
+      }
+    };
+
+    function mostrarEscena(nombre) {
+      const escena = historia[nombre];
+      document.getElementById("historia").innerText = escena.texto;
+      const opcionesDiv = document.getElementById("opciones");
+      opcionesDiv.innerHTML = "";
+      escena.opciones.forEach(op => {
+        const btn = document.createElement("button");
+        btn.innerText = op.texto;
+        btn.onclick = () => mostrarEscena(op.destino);
+        opcionesDiv.appendChild(btn);
+      });
+    }
+
+    mostrarEscena("inicio");
+  </script>
+</body>
+</html>
